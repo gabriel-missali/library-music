@@ -1,6 +1,8 @@
-## Pré-requisitos
+# Library Music
 
-O library-music é uma aplicação web para gerenciar uma biblioteca de músicas. Foi desenvolvida utilizando Laravel 5.6, Postgres e Docker. A aplicação possui 3 níveis usuário public(Pode apenas visualizar as informações), user(Pode cri/editar/remover bandas/artistas, álbuns e músicas) e admin(Gerencia toda a aplicação).
+O Library Music é uma aplicação web para gerenciar uma biblioteca de músicas. Foi desenvolvida utilizando Laravel 5.6, Postgres e Docker. A aplicação possui 3 níveis usuário public(Pode apenas visualizar as informações), user(Pode cri/editar/remover bandas/artistas, álbuns e músicas) e admin(Gerencia toda a aplicação).
+
+## Pré-requisitos
 
 - [Instalar o Docker](https://docs.docker.com/compose/install/).
 - Rodar o comando seu terminal git clone https://github.com/gabriel-missali/library-music.git.
@@ -12,5 +14,3 @@ O library-music é uma aplicação web para gerenciar uma biblioteca de músicas
 - Assim que entrar no workspace rodar o comando php artisan migrate para criação das tabelas do banco de dados.
 - Após rodar o comando migrate será criado um usuário admin com email: admin@mail.com e senha: 123456.
 - Entrar no localhost:6060/public e utilizar a aplicação.
-
-# library-music
