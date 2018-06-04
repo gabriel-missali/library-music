@@ -53,7 +53,7 @@ class AlbumController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        // print_r($data);die;
+
         $validator = $this->validator($data);
 
         if ($validator->fails())
@@ -61,10 +61,19 @@ class AlbumController extends Controller
           return redirect('new-album')->withErrors($validator->messages());
         }
 
+        $file = $request->file('picture');
+        if($file){
+          $fileName = time().'_'.$file->getClientOriginalName();
+          $file->storeAs('images',$fileName);
+        } else {
+          $fileName = null;
+        }
+
         $album = Album::create([
             'band_artist' => $data['band_artist'],
             'name' => $data['name'],
             'year' => $data['year'],
+            'img' => $fileName,
         ]);
 
         return redirect('album');
@@ -111,9 +120,18 @@ class AlbumController extends Controller
           return redirect('edit-album')->withErrors($validator->messages());
         }
 
+        $file = $request->file('picture');
+        if($file){
+          $fileName = time().'_'.$file->getClientOriginalName();
+          $file->storeAs('images',$fileName);
+        } else {
+          $fileName = $data['old_picture'];
+        }
+        
         $album->band_artist = $data["band_artist"];
         $album->name = $data["name"];
         $album->year = $data["year"];
+        $album->img = $fileName;
         $album->save();
 
         return redirect('album');
@@ -141,6 +159,7 @@ class AlbumController extends Controller
             'band_artist' => 'required|integer',
             'name' => 'required|string|max:255',
             'year' => 'required|integer',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     }
 }

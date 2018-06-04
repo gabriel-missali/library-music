@@ -20,6 +20,16 @@
   padding: 0;
 }
 
+.info-img{
+  border:  none;
+  width: 100%;
+}
+
+.img-view{
+  height: 40px;
+  width: 40px;
+}
+
 .input-search input{
   border-radius: 4px 0 0 4px;
 }

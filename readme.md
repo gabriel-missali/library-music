@@ -2,6 +2,7 @@
 
 O Library Music é uma aplicação web para gerenciar uma biblioteca de músicas. Foi desenvolvida utilizando Laravel 5.6, Postgres e Docker. A aplicação possui 3 níveis usuário public(Pode apenas visualizar as informações), user(Pode cri/editar/remover bandas/artistas, álbuns e músicas) e admin(Gerencia toda a aplicação).
 
+
 ## Pré-requisitos
 
 - [Instalar o Docker](https://docs.docker.com/compose/install/).

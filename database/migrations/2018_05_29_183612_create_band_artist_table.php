@@ -18,6 +18,7 @@ class CreateBandArtistTable extends Migration
             $table->string('name');
             $table->string('genre');
             $table->string('description');
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }

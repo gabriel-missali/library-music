@@ -21,10 +21,10 @@
                     @endif
 
                     @if (!isset($bandArtist))
-                      <form method="POST" action="{{ url('band-artist') }}">
+                      <form method="POST" action="{{ url('band-artist') }}" enctype="multipart/form-data">
                       @csrf
                     @else
-                      <form method="POST" action="{{ url('band-artist', ['id' => $bandArtist->id]) }}">
+                      <form method="POST" action="{{ url('band-artist', ['id' => $bandArtist->id]) }}" enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="put" />
                         {!! csrf_field() !!}
                     @endif
@@ -38,6 +38,24 @@
                               @if ($errors->has('name'))
                                   <span class="invalid-feedback">
                                       <strong>{{ $errors->first('name') }}</strong>
+                                  </span>
+                              @endif
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
+
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <input type="file" name="picture" id="picture">
+                                @if(isset($bandArtist) && $bandArtist->img)
+                                  <input class="info-img" type="text" name="old_picture" value="{{$bandArtist->img}}" readonly="readonly">
+                                @endif
+                              </div>
+                              @if ($errors->has('picture'))
+                                  <span class="invalid-feedback">
+                                      <strong>{{ $errors->first('picture') }}</strong>
                                   </span>
                               @endif
                           </div>

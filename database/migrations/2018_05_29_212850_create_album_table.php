@@ -18,6 +18,7 @@ class CreateAlbumTable extends Migration
             $table->integer('band_artist');
             $table->string('name');
             $table->integer('year');
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@ class Album extends Model
     protected $table = 'public.album';
 
     protected $fillable = [
-        'band_artist', 'name', 'year'
+        'band_artist', 'name', 'year', 'img'
     ];
 
     public function getAllAlbumsThisBandOrArtist($id){

@@ -50,16 +50,27 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
+
         $validator = $this->validator($data);
         if ($validator->fails())
     		{
     			return redirect('/new-user')->withErrors($validator->messages());
     		}
+
+        $file = $request->file('picture');
+        if($file){
+          $fileName = time().'_'.$file->getClientOriginalName();
+          $file->storeAs('images',$fileName);
+        } else {
+          $fileName = null;
+        }
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'permission' => $data['permission'],
             'password' => Hash::make($data['password']),
+            'img' => $fileName,
         ]);
 
         return redirect('/users');
@@ -103,12 +114,21 @@ class UserController extends Controller
         $validator = $this->validatorEdit($data);
         if ($validator->fails())
     		{
-    			return redirect('/new-user')->withErrors($validator->messages());
+    			return redirect('edit-user/'.$id)->withErrors($validator->messages());
     		}
+
+        $file = $request->file('picture');
+        if($file){
+          $fileName = time().'_'.$file->getClientOriginalName();
+          $file->storeAs('images',$fileName);
+        } else {
+          $fileName = $data['old_picture'];
+        }
 
         $user->name = $data["name"];
         $user->email = $data["email"];
         $user->permission = $data["permission"];
+        $user->img = $fileName;
         $response = $user->save();
 
         return redirect('/users');
@@ -135,6 +155,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'permission' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     }
 
@@ -142,8 +163,8 @@ class UserController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
             'permission' => 'required|string|max:255',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     }
 }

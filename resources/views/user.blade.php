@@ -21,10 +21,10 @@
                     @endif
 
                     @if (!isset($user))
-                      <form method="POST" action="{{ url('user') }}">
+                      <form method="POST" action="{{ url('user') }}" enctype="multipart/form-data">
                       @csrf
                     @else
-                      <form method="POST" action="{{ url('user', ['id' => $user->id]) }}">
+                      <form method="POST" action="{{ url('user', ['id' => $user->id]) }}" enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="put" />
                         {!! csrf_field() !!}
                     @endif
@@ -38,6 +38,24 @@
                               @if ($errors->has('name'))
                                   <span class="invalid-feedback">
                                       <strong>{{ $errors->first('name') }}</strong>
+                                  </span>
+                              @endif
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
+
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                <input type="file" name="picture" id="picture">
+                                @if(isset($album) && $album->img)
+                                  <input class="info-img" type="text" name="old_picture" value="{{$album->img}}" readonly="readonly">
+                                @endif
+                              </div>
+                              @if ($errors->has('picture'))
+                                  <span class="invalid-feedback">
+                                      <strong>{{ $errors->first('picture') }}</strong>
                                   </span>
                               @endif
                           </div>
@@ -64,7 +82,7 @@
                               <select id="permission" type="text" class="form-control{{ $errors->has('permission') ? ' is-invalid' : '' }}" name="permission" value="{{ old('permission') }}" required autofocus>
                                 <option value="admin" @if (isset($user) && $user->permission == 'admin') selected="selected" @endif>Admin</option>
                                 <option value="user" @if (isset($user) && $user->permission == 'user') selected="selected" @endif>User</option>
-                                <option value="public" @if (isset($user) && $user->permission == 'admin') selected="selected" @endif>Public</option>
+                                <option value="public" @if (isset($user) && $user->permission == 'public') selected="selected" @endif>Public</option>
                               </select>
                               @if ($errors->has('permission'))
                                   <span class="invalid-feedback">

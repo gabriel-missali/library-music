@@ -21,6 +21,7 @@
 
                     <table class="table table-bordered table-striped table-user">
                       <tr>
+                        <td>Image</td>
                         <td>Band/Artist</td>
                         <td>Name</td>
                         <td>Year</td>
@@ -31,6 +32,11 @@
                       </tr>
                       @foreach ($albums as $album)
                         <tr>
+                          <td>
+                            @if($album->img)
+                              <img class="img-view" src="/storage/app/images/{{$album->img}}"/>
+                            @endif
+                          </td>
                           <td>{{$album->name_band_artist}}</td>
                           <td>{{$album->name}}</td>
                           <td>{{$album->year}}</td>

@@ -13,7 +13,6 @@ class BandArtist extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'genre', 'description'
-        // 'name', 'image', 'genre', 'description'
+        'name', 'genre', 'description', 'img'
     ];
 }

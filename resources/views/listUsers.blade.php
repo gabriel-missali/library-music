@@ -23,6 +23,7 @@
                     @endif
                     <table class="table table-bordered table-striped table-user">
                       <tr>
+                        <td>Image</td>
                         <td>Name</td>
                         <td>Email</td>
                         <td>Permission</td>
@@ -30,6 +31,11 @@
                       </tr>
                       @foreach ($users as $user)
                         <tr>
+                          <td>
+                            @if($user->img)
+                              <img class="img-view" src="/storage/app/images/{{$user->img}}"/>
+                            @endif
+                          </td>
                           <td>{{$user->name}}</td>
                           <td>{{$user->email}}</td>
                           <td>{{$user->permission}}</td>

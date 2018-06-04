@@ -45,12 +45,18 @@
                               <div class="col-md-12 no-padding-mobile">
                                 <table class="table table-bordered table-striped table-user">
                                   <tr>
+                                    <td>Image</td>
                                     <td>Name</td>
                                     <td>Genre</td>
                                     <td>Description</td>
                                   </tr>
                                   @foreach($results as $value)
                                     <tr>
+                                      <td>
+                                        @if($value->img)
+                                          <img class="img-view" src="/storage/app/images/{{$value->img}}"/>
+                                        @endif
+                                      </td>
                                       <td>{{$value->name}}</td>
                                       <td>{{$value->genre}}</td>
                                       <td>{{$value->description}}</td>
@@ -66,12 +72,18 @@
                               <div class="col-md-12 no-padding-mobile">
                                 <table class="table table-bordered table-striped table-user">
                                   <tr>
+                                    <td>Image</td>
                                     <td>Band/Artist</td>
                                     <td>Name</td>
                                     <td>Year</td>
                                   </tr>
                                   @foreach($results as $value)
                                     <tr>
+                                      <td>
+                                        @if($value->img)
+                                          <img class="img-view" src="/storage/app/images/{{$value->img}}"/>
+                                        @endif
+                                      </td>
                                       <td>{{$value->name_band_artist}}</td>
                                       <td>{{$value->name}}</td>
                                       <td>{{$value->year}}</td>

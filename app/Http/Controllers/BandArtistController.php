@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\BandArtist;
 use App\Album;
 use App\Song;
+use Illuminate\Support\Facades\Input;
 
 class BandArtistController extends Controller
 {
@@ -50,6 +51,7 @@ class BandArtistController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
+
         $validator = $this->validator($data);
 
         if ($validator->fails())
@@ -57,10 +59,19 @@ class BandArtistController extends Controller
     			return redirect('new-band-artist')->withErrors($validator->messages());
     		}
 
+        $file = $request->file('picture');
+        if($file){
+          $fileName = time().'_'.$file->getClientOriginalName();
+          $file->storeAs('images',$fileName);
+        } else {
+          $fileName = null;
+        }
+
         $bandArtist = BandArtist::create([
             'name' => $data['name'],
             'genre' => $data['genre'],
             'description' => $data['description'],
+            'img' => $fileName,
         ]);
 
         return redirect('/band-artist');
@@ -107,9 +118,18 @@ class BandArtistController extends Controller
         return redirect('new-band-artist')->withErrors($validator->messages());
       }
 
+      $file = $request->file('picture');
+      if($file){
+        $fileName = time().'_'.$file->getClientOriginalName();
+        $file->storeAs('images',$fileName);
+      } else {
+        $fileName = $data['old_picture'];
+      }
+
       $bandArtist->name = $data["name"];
       $bandArtist->genre = $data["genre"];
       $bandArtist->description = $data["description"];
+      $bandArtist->img = $fileName;
       $bandArtist->save();
 
       return redirect('band-artist');
@@ -145,6 +165,7 @@ class BandArtistController extends Controller
             'name' => 'required|string|max:255',
             'genre' => 'required|string|max:255',
             'description' => 'required|string|max:255',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     }
 }
