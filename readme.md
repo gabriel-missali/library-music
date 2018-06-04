@@ -1,12 +1,12 @@
 # Library Music
 
-O Library Music é uma aplicação web para gerenciar uma biblioteca de músicas. Foi desenvolvida utilizando Laravel 5.6, Postgres e Docker. A aplicação possui 3 níveis usuário public(Pode apenas visualizar as informações), user(Pode cri/editar/remover bandas/artistas, álbuns e músicas) e admin(Gerencia toda a aplicação).
+O Library Music é uma aplicação web para gerenciar uma biblioteca de músicas. Foi desenvolvida utilizando Laravel 5.6, Postgres e Docker. A aplicação possui 3 níveis usuário public(Pode apenas visualizar as informações), user(Pode criar/editar/remover bandas/artistas, álbuns e músicas) e admin(Gerencia toda a aplicação).
 
 
 ## Pré-requisitos
 
 - [Instalar o Docker](https://docs.docker.com/compose/install/).
-- Rodar o comando seu terminal git clone https://github.com/gabriel-missali/library-music.git.
+- Rodar o comando no terminal git clone https://github.com/gabriel-missali/library-music.git.
 - No diretório do projeto criar o .env, rodar o comando cp .env.example .env
 - Entrar no projeto e na ir no diretório laradocks e rodar o comando cp env-example .env para criar o arquivo de configuração do docker.
 - Após criar o arquivo de configuração rodar o comando docker-compose up --build -d apache2 postgres para criar o workspace.
